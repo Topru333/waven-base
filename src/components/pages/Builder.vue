@@ -3,7 +3,7 @@
     <div class="spells">
       <div v-for="(item, index) in spells" :key="index">
         <b-img :id="`spell${index}`" class="spell" :src="item.image" rounded/>
-        <b-popover delay="150" :target="`spell${index}`" triggers="hover focus" :title="item.name" :content="item.info" placement="top"/>
+        <b-popover delay="150" :target="`spell${index}`" triggers="hover focus" :title="item.name.fr" :content="item.info.fr" placement="top"/>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-# waven-builder
+# waven-base
 
 ## Project setup
 ```
