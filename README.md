@@ -25,5 +25,19 @@ npm run test
 npm run lint
 ```
 
+### Generate files for builder data
+```
+npm run generate
+or
+gulp generate
+```
+
+### Clean generated files and dist
+```
+npm run clean
+or
+gulp clean
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

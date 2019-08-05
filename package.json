@@ -1,5 +1,5 @@
 {
-  "name": "waven-builder",
+  "name": "waven-base",
   "version": "0.1.0",
   "private": true,
   "scripts": {
