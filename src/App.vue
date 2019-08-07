@@ -2,11 +2,11 @@
   <div id="app">
     <router-view/>
     <b-navbar>
-      <b-nav-item href="#/" class="navb-container mx-auto" v-on:click="selected='Home';">
-          <img class="navb" v-bind:class="{ 'selected': (selected === 'Home') }" src="./assets/home_menu_icon.png"/>
+      <b-nav-item href="#/" class="navb-container non-draggable mx-auto" v-on:click="selected='Home';">
+          <img class="navb non-draggable" v-bind:class="{ 'selected': (selected === 'Home') }" src="./assets/home_menu_icon.png"/>
       </b-nav-item>
-      <b-nav-item href="#/builder" class="navb-container mx-auto" v-on:click="selected='Builder';">
-          <img class="navb" v-bind:class="{ 'selected': (selected === 'Builder') }" src="./assets/builder_menu_icon.png"/>
+      <b-nav-item href="#/builder" class="navb-container non-draggable mx-auto" v-on:click="selected='Builder';">
+          <img class="navb non-draggable" v-bind:class="{ 'selected': (selected === 'Builder') }" src="./assets/builder_menu_icon.png"/>
       </b-nav-item>
     </b-navbar>
   </div>
@@ -110,6 +110,11 @@ export default {
 
   a {
     color: #42b983;
+  }
+
+  .non-draggable,
+  .non-draggable > a {
+    -webkit-user-drag: none;
   }
 
   @keyframes reveal {

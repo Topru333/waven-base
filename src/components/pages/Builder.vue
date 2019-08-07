@@ -9,7 +9,7 @@
               class="wclass mx-auto"
               v-bind:class="{ 'selected': (selected_class === index) }"
               v-on:click="selected_class=index">
-            <b-img :id="`class${index}`" :src="item.emblem_image" class="emblem"/>
+            <b-img :id="`class${index}`" :src="item.emblem_image" class="emblem non-draggable"/>
           </div>
         </div>
       </div>
@@ -19,12 +19,12 @@
              class="char_container mx-auto"
              v-bind:class="{ 'selected': (selected_character === index) }"
              v-on:click="selected_character=index">
-          <b-img :id="`char${index}`" :src="item.image" class="char_image"/>
+          <b-img :id="`char${index}`" :src="item.image" class="char_image non-draggable"/>
         </div>
       </div>
       <div class="specialty">
         <div class="skill_container">
-          <b-img id="specialty_skill" :src="specialty.image" class="skill_image"/>
+          <b-img id="specialty_skill" :src="specialty.image" class="skill_image non-draggable"/>
           <b-popover delay="150" target="specialty_skill" triggers="hover focus"
           :title="specialty.active_name.fr" :content="specialty.active_info.fr" placement="top"/>
         </div>
@@ -223,6 +223,7 @@ export default {
   }
 
   .passive {
+    user-select: text;
     font-size: 1.8vh;
     color: white;
     width: 11vw;
