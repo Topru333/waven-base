@@ -11,7 +11,7 @@ const WAVEN_BASE_URL = 'https://www.waven-game.com';
 
 function detectClass(classes, url) {
   for(let key in classes) {
-    if (url.includes(classes[key].name)) {
+    if (url.includes(classes[key].name+'/')) {
       return classes[key].name;
     }
   }
@@ -223,9 +223,8 @@ module.exports.get_classes = async function (classes, characters_url, public_dir
         if (!char_class) {
           console.log('ERROR\nCan\'t detect class\n');
         }
-        let char_obj = {
 
-        };
+        let char_obj = {};
 
         let character_url = WAVEN_BASE_URL + characters_a[key].attribs.href;
         await rp(character_url).then(async function(html) {
