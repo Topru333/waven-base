@@ -20,11 +20,11 @@ export default {
     return {
       menu_links: {
         'Home' : {
-          image: '/static_assets/home_menu_icon.png',
+          image: '/assets/home_menu_icon.png',
           path: '#/'
         },
         'Builder' : {
-          image: '/static_assets/builder_menu_icon.png',
+          image: '/assets/builder_menu_icon.png',
           path: '#/builder'
         }
       },
