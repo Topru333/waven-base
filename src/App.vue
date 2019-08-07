@@ -2,12 +2,11 @@
   <div id="app">
     <router-view/>
     <b-navbar>
-      <b-nav-item v-for="(item, index) in menu_links"
-                 :key="index"
-                 :href="item.path"
-                 class="navb-container mx-auto"
-                 v-on:click="selected=index;">
-          <b-img class="navb" v-bind:class="{ 'selected': (selected === index) }" :src="item.image"/>
+      <b-nav-item href="#/" class="navb-container mx-auto" v-on:click="selected='home';">
+          <img class="navb" v-bind:class="{ 'selected': (selected === 'home') }" src="./assets/home_menu_icon.png"/>
+      </b-nav-item>
+      <b-nav-item href="#/builder" class="navb-container mx-auto" v-on:click="selected='builder';">
+          <img class="navb" v-bind:class="{ 'selected': (selected === 'builder') }" src="./assets/builder_menu_icon.png"/>
       </b-nav-item>
     </b-navbar>
   </div>
@@ -18,16 +17,6 @@ export default {
   name: 'App',
   data () {
     return {
-      menu_links: {
-        'Home' : {
-          image: '/assets/home_menu_icon.png',
-          path: '#/'
-        },
-        'Builder' : {
-          image: '/assets/builder_menu_icon.png',
-          path: '#/builder'
-        }
-      },
       selected: ''
     }
   },
