@@ -2,11 +2,11 @@
   <div id="app">
     <router-view/>
     <b-navbar>
-      <b-nav-item href="#/" class="navb-container mx-auto" v-on:click="selected='home';">
-          <img class="navb" v-bind:class="{ 'selected': (selected === 'home') }" src="./assets/home_menu_icon.png"/>
+      <b-nav-item href="#/" class="navb-container mx-auto" v-on:click="selected='Home';">
+          <img class="navb" v-bind:class="{ 'selected': (selected === 'Home') }" src="./assets/home_menu_icon.png"/>
       </b-nav-item>
-      <b-nav-item href="#/builder" class="navb-container mx-auto" v-on:click="selected='builder';">
-          <img class="navb" v-bind:class="{ 'selected': (selected === 'builder') }" src="./assets/builder_menu_icon.png"/>
+      <b-nav-item href="#/builder" class="navb-container mx-auto" v-on:click="selected='Builder';">
+          <img class="navb" v-bind:class="{ 'selected': (selected === 'Builder') }" src="./assets/builder_menu_icon.png"/>
       </b-nav-item>
     </b-navbar>
   </div>
@@ -21,11 +21,7 @@ export default {
     }
   },
   mounted(){
-    for (let key in this.menu_links) {
-      if (this.$route.name === key) {
-        this.selected = key;
-      }
-    }
+    this.selected = this.$route.name;
   }
 }
 </script>
