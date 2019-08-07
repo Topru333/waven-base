@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="red">Wakfu base alpha</h1>
-    <router-link tag="li" to="/builder">
-      <a>builder</a>
-    </router-link>
+    <h1 class="white">Wakfu base alpha</h1>
   </div>
 </template>
 
@@ -22,8 +19,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .red {
-    color: #f00;
+  .white {
+    color: white;
   }
   .home {
     padding: 10vw;
