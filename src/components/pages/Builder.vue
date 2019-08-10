@@ -3,22 +3,20 @@
     <div class="left_builder">
       <div class="wclasses-container">
         <div class="wclasses">
-          <div v-for="(item, index) in classes"
-              :key="index"
+          <div v-for="(item, index) in classes" :key="index"
               class="wclass mx-auto"
               v-bind:class="{ 'selected': (selected_class === index) }"
-              v-on:click="selected_class=index">
+              v-on:click="selected_class=index; resetSelectedCharacter(); resetSpells();">
             <b-img :id="`class${index}`" :src="item.emblem_image" class="emblem non-draggable"/>
           </div>
         </div>
       </div>
       <div class="characters">
-        <div v-for="(item, index) in classes[selected_class].characters"
-             :key="index"
-             class="char_container mx-auto"
+        <div v-for="(item, index) in classes[selected_class].characters" :key="index"
+             class="char_container skeleton mx-auto"
              v-bind:class="{ 'selected': (selected_character === index) }"
              v-on:click="selected_character=index">
-          <b-img :id="`char${index}`" :src="item.image" class="char_image non-draggable"/>
+          <b-img :id="index" :src="item.image" class="char_image non-draggable"/>
         </div>
       </div>
       <div class="specialty">
@@ -33,15 +31,14 @@
       </div>
       <div id="spells_sidekicks">
         <div class="spells">
-          <div v-for="index in 8"
-               :key="`scontainer${index}`"
-               :id="`scontainer${index}`"
+          <div v-for="index in 8" :key="`scontainer${index}`" :id="`scontainer${index}`"
                class="spell_container"
                v-bind:class="{'edit_mode': (spell_in_edit===index)}"
                v-on:click="editspell(index)">
-            <b-img :src="selected_spells[index].image" class="spell_image non-draggable"/>
+            <b-img :src="selected_spells[index].image" class="spell_image non-draggable" v-if="selected_spells[index]"/>
             <b-popover delay="150" :target="`scontainer${index}`" triggers="hover focus"
-            :title="selected_spells[index].name.fr" :content="selected_spells[index].info.fr" placement="top"/>
+            :title="selected_spells[index].name.fr" :content="selected_spells[index].info.fr" placement="top"
+            v-if="selected_spells[index]"/>
           </div>
         </div>
         <div class="sidekicks">
@@ -53,12 +50,11 @@
     <div class="right_builder">
     </div>
     <div class="spell_choice" v-if="spell_in_edit!=''">
-      <div v-for="(item, index) in classes[selected_class].spells"
-          :id="`choice_container${index}`"
-          class="choice_container"
-          v-bind:key="index">
+      <div v-for="(item, index) in classes[selected_class].spells" v-bind:key="index" :id="index"
+          class="choice_container skeleton"
+          v-on:click="setspell(index)">
         <b-img :src="item.image" class="spell_image non-draggable"/>
-        <b-popover delay="150" :target="`choice_container${index}`" triggers="hover focus"
+        <b-popover delay="150" :target="index" triggers="hover focus"
         :title="item.name.fr" :content="item.info.fr" placement="top"/>
       </div>
     </div>
@@ -76,36 +72,33 @@ export default {
     return {
       classes: lib.classes,
       selected_class: 'xelor',
-      selected_character: 0,
-      spell_in_edit: ''
+      selected_character: Object.keys(lib.classes['xelor'].characters)[0],
+      spell_in_edit: '',
+      selected_spells: {}
     }
   },
   methods: {
     editspell: function (index) {
       this.spell_in_edit = index;
+    },
+    setspell: function (index) {
+      this.selected_spells[this.spell_in_edit] = this.currentClass.spells[index];
+      this.spell_in_edit = '';
+    },
+    resetSelectedCharacter() {
+      this.selected_character = Object.keys(lib.classes[this.selected_class].characters)[0];
+    },
+    resetSpells: function () {
+      this.selected_spells = {};
     }
   },
   computed: {
-    // a computed getter
     specialty: function () {
-      // `this` points to the vm instance
       return this.classes[this.selected_class].characters[this.selected_character].specialty;
+    },
+    currentClass: function () {
+      return this.classes[this.selected_class];
     }
-  },
-  beforeCreate() {
-    this.selected_spells = {};
-    for (let i = 1; i <= 8; i++) {
-      this.selected_spells[i] = {
-        image: null,
-        name: {
-          fr: ''
-        },
-        info: {
-          fr: ''
-        }
-      };
-    }
-
   }
 }
 </script>
@@ -210,6 +203,7 @@ export default {
 
   .char_container {
     width: 10vh;
+    height: 10vh;
     border: 1px solid #174B50;
     box-sizing: border-box;
     border-radius: 5px;
@@ -323,7 +317,15 @@ export default {
   .choice_container {
     width: 8vh;
     height: 8vh;
-    margin: 0.1vh
+    margin: 0.1vh;
+  }
+
+  .char_container.skeleton,
+  .choice_container.skeleton {
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(207,232,239,10%) 40px, transparent);
+    background-size: 80% 80%;
+    background-position: 50% 50%;
   }
 
   .black_screen {
