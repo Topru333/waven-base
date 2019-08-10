@@ -6,6 +6,7 @@ const _cliProgress = require('cli-progress');
 const {checkCreateDir} = require('./dirsutil.js');
 const fs = require('fs');
 const request = require('request');
+const crypto = require('crypto');
 
 const WAVEN_BASE_URL = 'https://www.waven-game.com';
 
@@ -123,13 +124,13 @@ module.exports.get_classes = async function (classes, characters_url, public_dir
     classes: {}
   };
 
-  bar1.start(classes.length + 1, 0);
+  bar1.start(classes.length * 6 + 1, 0);
 
   for (let c = 0; c < classes.length; c++) {
     await rp(classes[c].url).then(async function(html) {
 
       json_object.classes[classes[c].name] = {
-        spells: [],
+        spells: {},
         description: {
           fr: ''
         }
@@ -154,7 +155,12 @@ module.exports.get_classes = async function (classes, characters_url, public_dir
 
       let spells = $('.ak-list > div.ak-list-spells > div > a', html);
       Object.keys(spells).forEach(key => parseSpell(spells[key], global_class_folder, local_class_folder).then(
-        result => {if (result) json_object.classes[classes[c].name].spells.push(result)}
+        result => {
+          if (result) {
+            let hash = crypto.createHash('sha1').update(result.name.fr).digest('hex');
+            json_object.classes[classes[c].name].spells[hash] = result;
+          }
+        }
       ));
 
       // characters
@@ -207,7 +213,7 @@ module.exports.get_classes = async function (classes, characters_url, public_dir
   }
 
   for (let c in classes) {
-    json_object.classes[classes[c].name].characters = [];
+    json_object.classes[classes[c].name].characters = {};
   }
 
   await rp(characters_url).then(async function(html) {
@@ -247,8 +253,9 @@ module.exports.get_classes = async function (classes, characters_url, public_dir
           char_obj.image = path.join(local_class_folder, img_name);
         }
 
-        json_object.classes[char_class].characters.push(char_obj);
-
+        let hash = crypto.createHash('sha1').update(char_obj.name.fr).digest('hex');
+        json_object.classes[char_class].characters[hash] = char_obj;
+        bar1.increment();
       }
     }
   });
