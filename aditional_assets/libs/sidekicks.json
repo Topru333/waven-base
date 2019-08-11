@@ -1,0 +1,60 @@
+{
+  "sidekicks": [
+    {
+      "image": "assets/sidekicks/Xelor Necrome Male RD-CAB-75bf35e6f02ab6ee3453b0bde7c64fab-3604894460405357804.png",
+      "name": {
+        "fr": "Maitre Ergeneur"
+      },
+      "info": {
+        "fr": "APPARITION: Vos pièges et vos MÉCANISMES déclenchent EXPLOSION"
+      },
+      "stats": {
+        "hp": 67,
+        "damage": 13,
+        "mp": 3
+      }
+    },
+    {
+      "image": "assets/sidekicks/Eniripsa Dargone CC-CAB-75bf35e6f02ab6ee3453b0bde7c64fab-8534327109461701625.png",
+      "name": {
+        "fr": "DARGONE"
+      },
+      "info": {
+        "fr": "Quand elle attaque, elle soigne votre héros d'une valeur égale å son AT"
+      },
+      "stats": {
+        "hp": 67,
+        "damage": 11,
+        "mp": 3
+      }
+    },
+    {
+      "image": "assets/sidekicks/Enutrof Necrome Female CC-CAB-75bf35e6f02ab6ee3453b0bde7c64fab-6803014953716716386.png",
+      "name": {
+        "fr": "CHAMPIONNE PÉRIMÉE"
+      },
+      "info": {
+        "fr": "DÉBUT DU TOUR: Réduit de 1 PA le coüt du premier sort que vous jouez durant ce tour."
+      },
+      "stats": {
+        "hp": 67,
+        "damage": 17,
+        "mp": 3
+      }
+    },
+    {
+      "image": "assets/sidekicks/Enutrof Necrome Female CC-CAB-75bf35e6f02ab6ee3453b0bde7c64fab-6803014953716716386.png",
+      "name": {
+        "fr": "SKHUL"
+      },
+      "info": {
+        "fr": "DÉBUT DU TOUR : Inflige son AT à l'adversaire ayant le plus de PV"
+      },
+      "stats": {
+        "hp": 67,
+        "damage": 15,
+        "mp": 3
+      }
+    }
+  ]
+}
