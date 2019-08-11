@@ -52,6 +52,7 @@
     <div class="spell_choice" v-if="spell_in_edit!=''">
       <div v-for="(item, index) in classes[selected_class].spells" v-bind:key="index" :id="index"
           class="choice_container skeleton"
+          v-bind:class="{'selected': (selected_spell_indexes.includes(index))}"
           v-on:click="setspell(index)">
         <b-img :src="item.image" class="spell_image non-draggable"/>
         <b-popover delay="150" :target="index" triggers="hover focus"
@@ -74,7 +75,8 @@ export default {
       selected_class: 'xelor',
       selected_character: Object.keys(lib.classes['xelor'].characters)[0],
       spell_in_edit: '',
-      selected_spells: {}
+      selected_spells: {},
+      selected_spell_indexes: []
     }
   },
   methods: {
@@ -82,13 +84,18 @@ export default {
       this.spell_in_edit = index;
     },
     setspell: function (index) {
+      if (this.selected_spell_indexes.includes(index)) {
+        return;
+      }
       this.selected_spells[this.spell_in_edit] = this.currentClass.spells[index];
+      this.selected_spell_indexes.push(index);
       this.spell_in_edit = '';
     },
     resetSelectedCharacter() {
       this.selected_character = Object.keys(lib.classes[this.selected_class].characters)[0];
     },
     resetSpells: function () {
+      this.selected_spell_indexes = [];
       this.selected_spells = {};
     }
   },
@@ -318,6 +325,10 @@ export default {
     width: 8vh;
     height: 8vh;
     margin: 0.1vh;
+  }
+
+  .choice_container.selected {
+    filter: grayscale(1);
   }
 
   .char_container.skeleton,
